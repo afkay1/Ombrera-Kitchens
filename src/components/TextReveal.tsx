@@ -39,10 +39,12 @@ export default function TextReveal({ text, as = "h2", className = "", delay = 0,
   const Tag = as;
   return (
     <Tag ref={ref} className={className} aria-label={text}>
-      {text.split(" ").map((w, i) => (
-        <span key={i} aria-hidden className="w inline-block overflow-hidden pb-[0.08em] align-bottom">
-          <span className="inline-block">{w}</span>
-          {" "}
+      {text.split(" ").map((w, i, arr) => (
+        <span key={i} aria-hidden>
+          <span className="w inline-block overflow-hidden pb-[0.08em] align-bottom">
+            <span className="inline-block">{w}</span>
+          </span>
+          {i < arr.length - 1 ? " " : ""}
         </span>
       ))}
     </Tag>
