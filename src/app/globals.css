@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pad: clamp(20px, 4.5vw, 72px);
+  --header: 84px;
+  --bg: #0e0d0c;
+  --muted: #9b948a;
+  --hair: #2a2622;
+}
+
+html, body { overflow-x: clip; }
+html {
+  background: #0e0d0c;
+  color: #ede8e0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body { font-family: var(--font-sans), system-ui, sans-serif; font-size: 17px; line-height: 1.65; }
+html[dir="rtl"] body { font-family: var(--font-ar), system-ui, sans-serif; font-size: 18px; line-height: 1.8; }
+::selection { background: #b8935a; color: #0e0d0c; }
+:focus-visible { outline: 1px solid #b8935a; outline-offset: 4px; }
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+@layer components {
+  .wrap { width: 100%; max-width: 1480px; margin-inline: auto; padding-inline: var(--pad); }
+
+  /* Section themes */
+  .sec-dark { --bg: #0e0d0c; --muted: #9b948a; --hair: #2a2622; background: var(--bg); color: #ede8e0; }
+  .sec-surface { --bg: #161412; --muted: #9b948a; --hair: #2e2925; background: var(--bg); color: #ede8e0; }
+  .sec-light { --bg: #f2eee7; --muted: #5e5850; --hair: #d9d2c6; background: var(--bg); color: #0e0d0c; }
+  .text-mute { color: var(--muted); }
+  .border-h { border-color: var(--hair); }
+  .bg-h { background-color: var(--hair); }
+
+  .label {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; line-height: 1.4;
+  }
+  html[dir="rtl"] .label { font-family: var(--font-ar), sans-serif; letter-spacing: 0; text-transform: none; font-size: 14px; font-weight: 500; }
+
+  .display { font-family: var(--font-display), Georgia, serif; font-weight: 400; line-height: 1; letter-spacing: -0.02em; }
+  .display em { font-style: italic; color: #b8935a; }
+  html[dir="rtl"] .display { font-family: var(--font-display-ar), serif; font-weight: 700; line-height: 1.35; letter-spacing: 0; }
+
+  .h-hero { font-size: clamp(52px, 8.6vw, 132px); }
+  .h1 { font-size: clamp(42px, 6vw, 92px); }
+  .h2 { font-size: clamp(34px, 4.4vw, 64px); }
+  .h3 { font-size: clamp(24px, 2.2vw, 34px); }
+  html[dir="rtl"] .h-hero { font-size: clamp(40px, 6.4vw, 98px); }
+  html[dir="rtl"] .h1 { font-size: clamp(34px, 4.6vw, 68px); }
+  html[dir="rtl"] .h2 { font-size: clamp(28px, 3.4vw, 48px); }
+  html[dir="rtl"] .h3 { font-size: clamp(21px, 1.9vw, 28px); }
+
+  .lead { font-size: clamp(17px, 1.3vw, 20px); line-height: 1.7; }
+  .rule { display: inline-block; width: 44px; height: 1px; background: #b8935a; flex: none; }
+
+  .link-arrow {
+    display: inline-flex; align-items: center; gap: 0.8em; position: relative; padding-bottom: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  html[dir="rtl"] .link-arrow { letter-spacing: 0; text-transform: none; font-size: 15px; font-weight: 500; }
+  .link-arrow::after {
+    content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: #b8935a;
+    transform: scaleX(0.3); transform-origin: left; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  html[dir="rtl"] .link-arrow::after { transform-origin: right; }
+  .link-arrow:hover::after, .link-arrow:focus-visible::after { transform: scaleX(1); }
+  .link-arrow .arrow { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+  .link-arrow:hover .arrow { transform: translateX(6px); }
+  html[dir="rtl"] .link-arrow .arrow { transform: scaleX(-1); }
+  html[dir="rtl"] .link-arrow:hover .arrow { transform: scaleX(-1) translateX(6px); }
+
+  .btn {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.9em;
+    min-height: 56px; padding: 0 32px; overflow: hidden; isolation: isolate;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    border: 1px solid currentColor; transition: color 0.5s ease, border-color 0.5s ease;
+  }
+  html[dir="rtl"] .btn { letter-spacing: 0; text-transform: none; font-size: 15px; font-weight: 500; }
+  .btn::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; background: #b8935a;
+    transform: translateY(101%); transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn:hover::before, .btn:focus-visible::before { transform: translateY(0); }
+  .btn-brass { background: #b8935a; color: #0e0d0c; border-color: #b8935a; }
+  .btn-brass::before { background: #ede8e0; }
+  .btn-brass:hover { border-color: #ede8e0; }
+  .btn-ghost { color: #ede8e0; border-color: rgba(237, 232, 224, 0.4); }
+  .btn-ghost:hover { color: #0e0d0c; border-color: #b8935a; }
+  .btn-ink { background: #0e0d0c; color: #ede8e0; border-color: #0e0d0c; }
+  .btn-ink:hover { color: #0e0d0c; border-color: #b8935a; }
+
+  .img-zoom img { transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1); }
+  .img-zoom:hover img { transform: scale(1.04); }
+
+  .field {
+    width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--hair);
+    padding: 14px 0; font-size: 17px; color: inherit; border-radius: 0; outline: none; transition: border-color 0.4s ease;
+  }
+  .field:focus { border-color: #b8935a; }
+  .field::placeholder { color: var(--muted); }
+  select.field {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 12px) 50%, calc(100% - 7px) 50%; background-size: 5px 5px; background-repeat: no-repeat;
+  }
+  html[dir="rtl"] select.field { background-position: 7px 50%, 12px 50%; }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Page enter */
+@keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
+.page-in { animation: page-in 0.6s ease both; }
+
+/* Reveal targets are hidden before paint by the boot stylesheet in layout.tsx */
+
+/* Intro: CSS fallback removes it even if scripts fail */
+@keyframes intro-out { to { opacity: 0; visibility: hidden; } }
+.intro { animation: intro-out 0.6s ease 3.4s forwards; }
+
+/* Hotspot pulse */
+@keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.4); opacity: 0; } }
+.pulse::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; border: 1px solid #b8935a; animation: pulse-ring 2.2s ease-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1 !important; }
+  .intro { display: none; }
+}
